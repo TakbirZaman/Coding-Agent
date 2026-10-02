@@ -53,12 +53,3 @@ src/ai_coding_agent/
 tests/      # sandbox + agent loop tests
 ```
 
-## Resume bullets (copy-paste)
-- Built autonomous AI coding agent in Python using OpenAI function-calling; implemented ReAct loop with 5 sandboxed tools and 12-step iteration cap.
-- Hardened execution with path-traversal guard and shell denylist; added pytest suite (mocked LLM) and Docker support.
-
-## LinkedIn post snippet
-> I built an AI coding agent that reads/writes code and runs tests autonomously. Python + OpenAI tool-use + sandboxing. Repo walkthrough + demo below. Feedback welcome!
-
-## Next steps
-- [ ] streaming output, vector-memory (embeddings), GitHub PR mode
