@@ -1,0 +1,13 @@
+[project]
+name = "ai-coding-agent"
+version = "0.1.0"
+description = "Autonomous AI coding agent with OpenAI tool-use, sandboxing, and verification"
+requires-python = ">=3.10"
+dependencies = ["openai>=1.40", "python-dotenv>=1.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[project.scripts]
+ai-agent = "ai_coding_agent.cli:main"
