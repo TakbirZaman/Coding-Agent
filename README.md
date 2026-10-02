@@ -1,10 +1,10 @@
-# AI Coding Agent — OpenAI + Tool-Use
+# AI Coding Agent — Gemini / OpenAI + Tool-Use
 
 [![CI](https://github.com/TakbirZaman/Coding-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/TakbirZaman/Coding-Agent/actions/workflows/ci.yml)
 
 Autonomous coding agent that plans, reads/writes code, runs shell commands safely, and verifies with tests. Built to show **LLM tool-calling, sandboxing, and agent-loop design**.
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue) ![OpenAI](https://img.shields.io/badge/LLM-OpenAI-green) ![Tests](https://img.shields.io/badge/tests-pytest-brightgreen)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue) ![Gemini](https://img.shields.io/badge/LLM-Gemini_free-blue) ![OpenAI](https://img.shields.io/badge/LLM-OpenAI-green) ![Tests](https://img.shields.io/badge/tests-pytest-brightgreen)
 
 ## Demo
 ![Demo](docs/demo.svg)
@@ -33,13 +33,14 @@ flowchart LR
 git clone https://github.com/TakbirZaman/Coding-Agent.git
 cd Coding-Agent
 pip install -e .
-cp .env.example .env  # add OPENAI_API_KEY
+cp .env.example .env  # add GEMINI_API_KEY (free: https://aistudio.google.com/apikey)
 # Mock demo (no key needed):
 # PowerShell: $env:AGENT_MOCK="1"; $env:PYTHONPATH="src"
 # bash: export AGENT_MOCK=1 PYTHONPATH=src
-python -m ai_coding_agent.cli "explore the repo and summarize" --workspace . --model gpt-4o-mini
-# Real run:
-python -m ai_coding_agent.cli "add docstring to tools.py" --workspace .
+python -m ai_coding_agent.cli "explore the repo and summarize" --workspace . --provider mock
+# Real run (Gemini free tier):
+python -m ai_coding_agent.cli "add docstring to tools.py" --workspace . --provider gemini
+# Or OpenAI: --provider openai (needs OPENAI_API_KEY)
 pytest -q
 ```
 
