@@ -6,6 +6,10 @@ Autonomous coding agent that plans, reads/writes code, runs shell commands safel
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue) ![OpenAI](https://img.shields.io/badge/LLM-OpenAI-green) ![Tests](https://img.shields.io/badge/tests-pytest-brightgreen)
 
+## Demo
+![Demo](docs/demo.svg)
+See [docs/DEMO.md](docs/DEMO.md) to re-record as GIF.
+
 ## Why recruiters care
 - Real agent loop (think → tool → observe), not a chatbot wrapper
 - 5 tools with JSON-schema function calling: `read_file, list_dir, write_file, edit_file, run_shell`
