@@ -1,5 +1,7 @@
 # AI Coding Agent — OpenAI + Tool-Use
 
+[![CI](https://github.com/TakbirZaman/Coding-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/TakbirZaman/Coding-Agent/actions/workflows/ci.yml)
+
 Autonomous coding agent that plans, reads/writes code, runs shell commands safely, and verifies with tests. Built to show **LLM tool-calling, sandboxing, and agent-loop design**.
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue) ![OpenAI](https://img.shields.io/badge/LLM-OpenAI-green) ![Tests](https://img.shields.io/badge/tests-pytest-brightgreen)
