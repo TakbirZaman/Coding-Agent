@@ -1,5 +1,6 @@
 """Tool registry with sandboxing for the coding agent."""
 from __future__ import annotations
+
 import os
 import subprocess
 from pathlib import Path
@@ -40,7 +41,7 @@ def run_shell(workspace: Path, command: str, timeout: int = 30) -> str:
     if any(b in low for b in BLOCKED_COMMANDS):
         raise ValueError("Blocked dangerous command")
     r = subprocess.run(command, shell=True, cwd=str(workspace),
-                        capture_output=True, text=True, timeout=timeout)
+                        capture_output=True, text=True, timeout=timeout, check=False)
     out = (r.stdout + r.stderr)[-8000:]
     return f"[exit {r.returncode}]\n{out}"
 
@@ -71,6 +72,6 @@ def dispatch(name: str, workspace: Path, args: dict) -> str:
         if t["name"] == name:
             try:
                 return str(t["fn"](workspace, **args))
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001 - tool errors must return, not crash agent
                 return f"ERROR: {e}"
     return f"ERROR: unknown tool {name}"

@@ -1,5 +1,5 @@
-from pathlib import Path
 from ai_coding_agent import tools
+
 
 def test_sandbox_blocks_escape(tmp_path):
     ws = tmp_path

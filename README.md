@@ -26,11 +26,13 @@ flowchart LR
 
 ## Quickstart
 ```bash
-cd D:\Projects\ai-coding-agent
-pip install -r requirements.txt
-copy .env.example .env  # add OPENAI_API_KEY
+git clone https://github.com/TakbirZaman/Coding-Agent.git
+cd Coding-Agent
+pip install -e .
+cp .env.example .env  # add OPENAI_API_KEY
 # Mock demo (no key needed):
-set AGENT_MOCK=1
+# PowerShell: $env:AGENT_MOCK="1"; $env:PYTHONPATH="src"
+# bash: export AGENT_MOCK=1 PYTHONPATH=src
 python -m ai_coding_agent.cli "explore the repo and summarize" --workspace . --model gpt-4o-mini
 # Real run:
 python -m ai_coding_agent.cli "add docstring to tools.py" --workspace .

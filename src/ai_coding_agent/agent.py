@@ -1,8 +1,11 @@
 """ReAct-style agent loop: think -> tool call -> observe, until done."""
 from __future__ import annotations
+
 from pathlib import Path
-from .llm import LLM, SYSTEM
+
 from . import tools
+from .llm import LLM, SYSTEM
+
 
 class Agent:
     def __init__(self, workspace: Path, model="gpt-4o-mini", max_steps=12, llm: LLM | None = None):

@@ -1,5 +1,6 @@
 """OpenAI client wrapper with mock mode for tests/demos."""
 from __future__ import annotations
+
 import json
 import os
 

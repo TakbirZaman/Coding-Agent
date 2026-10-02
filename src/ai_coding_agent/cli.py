@@ -1,7 +1,9 @@
 """CLI entry point."""
 import argparse
 from pathlib import Path
+
 from .agent import Agent
+
 
 def main():
     ap = argparse.ArgumentParser(description="AI Coding Agent (OpenAI + tools)")
