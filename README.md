@@ -1,56 +1,19 @@
-# AI Coding Agent — Gemini / OpenAI + Tool-Use
+# AI Coding Agent
 
-[![CI](https://github.com/TakbirZaman/Coding-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/TakbirZaman/Coding-Agent/actions/workflows/ci.yml)
+I wanted a coding assistant that actually touches code, not just chats. So I built one that plans, edits files, runs commands, and checks its work with tests.
 
-Autonomous coding agent that plans, reads/writes code, runs shell commands safely, and verifies with tests. Built to show **LLM tool-calling, sandboxing, and agent-loop design**.
+What it does:
+- Reads / writes / edits files inside a sandboxed workspace
+- Runs shell commands with a safety denylist
+- Works with Gemini (free tier) or OpenAI, plus a mock mode with no key
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue) ![Gemini](https://img.shields.io/badge/LLM-Gemini_free-blue) ![OpenAI](https://img.shields.io/badge/LLM-OpenAI-green) ![Tests](https://img.shields.io/badge/tests-pytest-brightgreen)
+Stack: Python, OpenAI function-calling, pytest, Docker
 
-## Demo
-![Demo](docs/demo.svg)
-See [docs/DEMO.md](docs/DEMO.md) to re-record as GIF.
-
-## Why recruiters care
-- Real agent loop (think → tool → observe), not a chatbot wrapper
-- 5 tools with JSON-schema function calling: `read_file, list_dir, write_file, edit_file, run_shell`
-- Safety: workspace sandbox (blocks `../` escape) + dangerous-command denylist
-- Verifiable: pytest suite with mocked LLM, mock mode demo without API key
-- Deployable: CLI + Dockerfile + `.env.example`
-
-## Architecture
-```mermaid
-flowchart LR
-  U[Task] --> A[Agent loop max 12 steps]
-  A --> L[OpenAI gpt-4o-mini tool-calling]
-  L -->|tool call| T[Tool registry]
-  T --> S[(Sandboxed workspace)]
-  S --> L
-  L -->|no tools| O[Final answer]
-```
-
-## Quickstart
+Run it:
 ```bash
-git clone https://github.com/TakbirZaman/Coding-Agent.git
-cd Coding-Agent
 pip install -e .
-cp .env.example .env  # add GEMINI_API_KEY (free: https://aistudio.google.com/apikey)
-# Mock demo (no key needed):
-# PowerShell: $env:AGENT_MOCK="1"; $env:PYTHONPATH="src"
-# bash: export AGENT_MOCK=1 PYTHONPATH=src
-python -m ai_coding_agent.cli "explore the repo and summarize" --workspace . --provider mock
-# Real run (Gemini free tier):
-python -m ai_coding_agent.cli "add docstring to tools.py" --workspace . --provider gemini
-# Or OpenAI: --provider openai (needs OPENAI_API_KEY)
-pytest -q
+cp .env.example .env
+# no key? use mock mode
+set AGENT_MOCK=1
+python -m ai_coding_agent.cli "summarize this repo" --workspace . --provider mock
 ```
-
-## Project structure
-```
-src/ai_coding_agent/
-  agent.py  # ReAct loop
-  tools.py  # sandboxed file + shell tools
-  llm.py    # OpenAI wrapper + mock
-  cli.py    # argparse entry
-tests/      # sandbox + agent loop tests
-```
-
